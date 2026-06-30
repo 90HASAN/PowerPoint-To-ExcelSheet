@@ -7,7 +7,10 @@ from converter import process_ppt, write_excel
 
 app = Flask(__name__)
 app.secret_key = 'dev-secret-key-change-me'
+
 app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024
+app.config['MAX_FORM_MEMORY_SIZE'] = 200 * 1024 * 1024
+app.config['MAX_FORM_PARTS'] = 1000
 
 ALLOWED_EXT = {'.pptx'}
 
