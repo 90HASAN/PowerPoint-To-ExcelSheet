@@ -4,6 +4,7 @@ import uuid
 import tempfile
 from flask import Flask, request, render_template, send_file, flash, redirect, url_for
 from converter import process_ppt, write_excel
+from werkzeug.datastructures import FileStorage
 
 app = Flask(__name__)
 app.secret_key = 'dev-secret-key-change-me'
@@ -32,7 +33,7 @@ def index():
 
 @app.route('/convert', methods=['POST'])
 def convert():
-    files = request.files.getlist('ppt_files')
+    files = request.files.getlist('ppt_files') or []
     files = [f for f in files if f and f.filename]
 
     if not files:
